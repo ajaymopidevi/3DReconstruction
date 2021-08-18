@@ -7,11 +7,14 @@ function F = eightpoint(pts1, pts2, M)
 N = size(pts1,1);
 A = zeros(N,9);
 
+P1 = pts1./M;
+P2 = pts2./M;
+
 for i=1:N
-  x = pts1(i,1)/M;
-  y = pts1(i,2)/M;
-  u = pts2(i,1)/M;
-  v = pts2(i,2)/M;
+  x = P1(i,1);
+  y = P1(i,2);
+  u = P2(i,1);
+  v = P2(i,2);
   
   A(i,:) = [u*x, u*y, u, v*x, v*y, v, x, y, 1];
   
