@@ -14,6 +14,7 @@ function [pts2] = epipolarCorrespondence(im1, im2, F, pts1)
 %		3. Considering patches around (x,y) in I1 and (x,y') in I2 and find the dissimilarity
 %		4. Patch around (x,y') with minimum dissimilarity is corresponding point for (x,y) 
 
+  %Pre-processing
   N = size(pts1,1);
   pts2 = zeros(N,2);
   
@@ -34,6 +35,7 @@ function [pts2] = epipolarCorrespondence(im1, im2, F, pts1)
   weights = fspecial('gaussian',[patch_size, patch_size], 0.5);
 
   for i=1:N
+	% 1. For every point p, find l' = Fp
     x1 = pts1(i,1);
     y1 = pts1(i,2);
     pt1 = [x1; y1; 1];
@@ -50,18 +52,23 @@ function [pts2] = epipolarCorrespondence(im1, im2, F, pts1)
     yend = min(h, y1+range);
     min_diff = Inf;
     for y = ystart:yend
-      %ax+by+c=0 -> x = -1/a(by+c)
-      x = round(-((l2(2)*y)+l2(3))/l2(1));
+      % 2. For every y in a range, find (x',y) that fits the line equation l'
+	  % ax+by+c=0 -> x = -1/a(by+c)
+	  x = round(-((l2(2)*y)+l2(3))/l2(1));
       
       if (x<xstart | x>xend)
         continue;
       endif
-      patch_im2 = im2(y-half_patch_size:y+half_patch_size, x-half_patch_size:x+half_patch_size);
+	  
+      %	3. Considering patches around (x,y) in I1 and (x,y') in I2 and find the dissimilarity
+	  patch_im2 = im2(y-half_patch_size:y+half_patch_size, x-half_patch_size:x+half_patch_size);
       patch_im2 = patch_im2.*weights;
       
       diff = pdist2(patch_im1, patch_im2);
       total_diff = sum(diff(:));
-      if total_diff < min_diff
+      
+	  %	4. Patch around (x,y') with minimum dissimilarity is corresponding point for (x,y) 
+	  if total_diff < min_diff
         pts2(i,:) =  [x,y];
         min_diff = total_diff;
       endif
