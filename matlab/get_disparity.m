@@ -18,16 +18,20 @@ dispM = zeros(sz1(1), sz1(2));
 
 for y=ystart:yend
   for x= xstart:xend
-    im1_patch = im1(y-w:y+w,x-w:x+w);
+    %For every pixel (x,y), consider a patch of size 2w+1 x 2w+1
+	im1_patch = im1(y-w:y+w,x-w:x+w);
     disparity = ones(xend-xstart+1,1)*Inf;
     
+	%Corresponding pixel for (x,y) will be (x',y)
+	%Calculate the dissimilarity scores for all x'
 	for idx = xstart:xend
       im2_patch = im2(y-w:y+w, idx-w:idx+w);
       diff = sum(sum((im2_patch - im1_patch).**2));
       disparity(idx) = diff;
       
     endfor
-    [v,i] = min(disparity);
+    %Find the lease  dissimilar patch to (x,y)
+	[v,i] = min(disparity);
     if v<= maxDisp
       dispM(y,x) = abs(i-x);
     endif
