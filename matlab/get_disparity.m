@@ -1,4 +1,4 @@
-function dispM = get_disparity(im1, im2, maxDisp, windowSize)
+function dispM = get_disparity(im1, im2)
 % GET_DISPARITY creates a disparity map from a pair of rectified images im1 and
 %   im2, given the maximum disparity MAXDISP and the window size WINDOWSIZE.
 %
@@ -8,6 +8,10 @@ function dispM = get_disparity(im1, im2, maxDisp, windowSize)
 %		   scores of patches (x+d,y) w.r.t (x,y) for all possible d
 %		3. Find the lest dissimilar patch to (x,y)
 %
+
+windowSize = 3;
+maxDisp = 20;
+
 sz1 = size(im1);
 sz2 = size(im2);
 
