@@ -9,9 +9,9 @@ function dispM = get_disparity(im1, im2)
 %		3. Find the lest dissimilar patch to (x,y)
 %
 
-windowSize = 3;
-maxDisp = 20;
-
+windowSize = 5;
+maxDisp = 50;
+searchRange = 40;
 sz1 = size(im1);
 sz2 = size(im2);
 
@@ -29,19 +29,21 @@ dispM = zeros(sz1(1), sz1(2));
 for y=ystart:yend
   for x= xstart:xend
     %For every pixel (x,y), consider a patch of size 2w+1 x 2w+1
-	im1_patch = im1(y-w:y+w,x-w:x+w);
+	  im1_patch = im1(y-w:y+w,x-w:x+w);
     disparity = ones(xend-xstart+1,1)*Inf;
     
-	%Corresponding pixel for (x,y) will be (x+d,y)
-	%Calculate the dissimilarity scores for all d
-	for idx = xstart:xend
+	  %Corresponding pixel for (x,y) will be (x+d,y)
+	  %Calculate the dissimilarity scores for all d
+    x1 = max(xstart,x -searchRange);
+    x2 = min(x+searchRange, xend);
+	  for idx = x1:x2
       im2_patch = im2(y-w:y+w, idx-w:idx+w);
       diff = sum(sum((im2_patch - im1_patch).**2));
       disparity(idx) = diff;
       
     endfor
     %Find the lease  dissimilar patch to (x,y)
-	[v,i] = min(disparity);
+	  [v,i] = min(disparity);
     if v<= maxDisp
       dispM(y,x) = abs(i-x);
     endif

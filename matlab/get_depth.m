@@ -13,3 +13,4 @@ b = norm(c1-c2);
 depthM = (b*f)./dispM;
 
 depthM(isnan(depthM))=0;
+depthM(isinf(depthM))=0;

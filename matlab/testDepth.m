@@ -4,15 +4,18 @@ im1 = imread('../data/im1.png');
 im2 = imread('../data/im2.png');
 im1 = rgb2gray(im1);
 im2 = rgb2gray(im2);
-load('rectify.mat', 'M1', 'M2', 'K1n', 'K2n', 'R1n', 'R2n', 't1n', 't2n');
+#load('rectify.mat', 'M1', 'M2', 'K1n', 'K2n', 'R1n', 'R2n', 't1n', 't2n');
+load('../data/extrinsics.mat','R1', 'R2', 't1', 't2');
+load('../data/intrinsics.mat');
 
-maxDisp = 20; 
-windowSize = 3;
-dispM = get_disparity(im1, im2, maxDisp, windowSize);
+
+dispM = get_disparity(im1, im2);
+imwrite(dispM, 'dispM.png');
 
 % --------------------  get depth map
 
-depthM = get_depth(dispM, K1n, K2n, R1n, R2n, t1n, t2n);
+depthM = get_depth(dispM, K1, K2, R1, R2, t1, t2);
+imwrite(depthM, 'depthM.png');
 
 
 % --------------------  Display
