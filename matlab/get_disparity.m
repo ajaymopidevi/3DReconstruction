@@ -49,5 +49,5 @@ for y=ystart:yend
     endif
     
   endfor
-  disp(y);
+  %disp(y);
 endfor

@@ -8,14 +8,14 @@ im2 = rgb2gray(im2);
 load('../data/extrinsics.mat','R1', 'R2', 't1', 't2');
 load('../data/intrinsics.mat');
 
-
-dispM = get_disparity(im1, im2);
-imwrite(dispM, 'dispM.png');
+%dispM=get_disparity(im1, im2);
+dispM = get_disparity_DP(im1, im2);
+imwrite(dispM, '../output/disparity_DP.png');
 
 % --------------------  get depth map
 
 depthM = get_depth(dispM, K1, K2, R1, R2, t1, t2);
-imwrite(depthM, 'depthM.png');
+imwrite(depthM, '../output/depth_DP.png');
 
 
 % --------------------  Display

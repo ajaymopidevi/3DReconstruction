@@ -10,7 +10,7 @@ im1 = im2double(im1);
 im2 = im2double(im2);
 
 Cost = zeros(sz1(2),sz1(2));
-occl_cost = 0.0009;
+occl_cost = 0.0075;
 Idx = zeros(sz1(2),sz1(2));
 dispMleft = zeros(sz1(1), sz1(2));
 dispMright = zeros(sz1(1), sz1(2));
@@ -48,7 +48,7 @@ for y=1:sz1(1)
         j = j-1;
     end
   end
-  disp(y);
+  %disp(y);
 endfor
 
 dispM = dispMleft;

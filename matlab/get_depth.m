@@ -2,7 +2,7 @@ function depthM = get_depth(dispM, K1, K2, R1, R2, t1, t2)
 % GET_DEPTH creates a depth map from a disparity map (DISPM).
 
 %f - focal length
-f = K1(1,1)
+f = K1(1,1);
 
 %Centres of both the cameras in real word
 c1 = -inv(K1*R1)*(R1*t1);
