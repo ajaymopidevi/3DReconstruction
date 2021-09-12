@@ -17,3 +17,31 @@
     * Estimate 4 possible camera matrices (M) using E
     * Estimate 3D locations using M
     * Correct configuration of camera matrix M has depth of all 3D locations > 0 
+
+
+
+## Dense Reconstruction using stereo images
+
+1. Disparity Map Generation
+   * For every pixel (x,y), corresponding pixel will be (x+d,y). Calculate dissimalrity scores for all possible d
+   * Find the least dissimilar patch to (x,y)
+2. Depth = ((c1 - c2)*f)./disparity_map <br />
+      &emsp; c1 - center of left camera<br />
+      &emsp; c2 - center of right camera<br />
+      &emsp; f - focal length<br />
+      
+# Block based Disaprity Map
+* For every pixel (x,y), consider a patch of size windowSize x windowSize
+* Corresponding pixel for (x,y) will be (x+d,y). Calculate dissimalrity scores of patches (x+d,y) w.r.t (x,y) for all possible d 
+* Find the least dissimilar patch to (x,y)
+
+Disparity Map           |  Depth Map
+:-------------------------:|:-------------------------:
+![](https://github.com/ajaynarasimha/3DReconstruction/blob/main/output/disparity_windowBased.png)  |  ![](https://github.com/ajaynarasimha/3DReconstruction/blob/main/output/depth_windowBaed.png)
+
+# Dynammic Programming based Disparity Map
+
+
+Disparity Map           |  Depth Map
+:-------------------------:|:-------------------------:
+![](https://github.com/ajaynarasimha/3DReconstruction/blob/main/output/disparity_DP.png)  |  ![](https://github.com/ajaynarasimha/3DReconstruction/blob/main/output/depth_DP.png)
