@@ -40,6 +40,13 @@ Disparity Map           |  Depth Map
 ![](https://github.com/ajaynarasimha/3DReconstruction/blob/main/output/disparity_windowBased.png)  |  ![](https://github.com/ajaynarasimha/3DReconstruction/blob/main/output/depth_windowBaed.png)
 
 # Dynammic Programming based Disparity Map
+![DPbasedDisparityMap](https://user-images.githubusercontent.com/28349806/132981660-c2b4a62d-3cbd-4b66-b1a5-bb37f59896f1.png)
+
+Cox, Hingorani, Rao, Maggs, [A Maximum Likelihood Stereo Algorithm](http://www.dia.fi.upm.es/~lbaumela/Vision13/PapersEstereo/CoxCVIU96-MaximumLikelihoodStereo.pdf)
+
+
+
+
 
 
 Disparity Map           |  Depth Map
